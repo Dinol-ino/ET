@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual env
+venv/
+
+# Env files
+.env
+app/.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Logs
+*.log
+
+# DB
+*.db
+
+# Tests
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Alembic
+alembic.ini.bak
