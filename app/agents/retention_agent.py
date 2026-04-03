@@ -1,10 +1,27 @@
 from __future__ import annotations
 
+from typing import Any
+
+from app.agents.deterministic_engine import DeterministicDecisionEngine
+
 
 class RetentionAgent:
-    """Placeholder agent interface for future churn and retention strategy orchestration."""
+    """Strict deterministic retention agent."""
 
-    def recommend_playbook(self, churn_risk: bool) -> str:
-        if churn_risk:
-            return "Trigger retention playbook: executive check-in, usage review, and success plan."
-        return "Account engagement is stable; continue standard customer success cadence."
+    def __init__(self) -> None:
+        self.engine = DeterministicDecisionEngine()
+
+    def handle_event(
+        self,
+        event_data: dict[str, Any],
+        crm_data: dict[str, Any],
+        engagement_metrics: dict[str, Any],
+        history: list[dict[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        return self.engine.decide(
+            agent_name="retention_agent",
+            event_data=event_data,
+            crm_data=crm_data,
+            engagement_metrics=engagement_metrics,
+            history=history,
+        )
