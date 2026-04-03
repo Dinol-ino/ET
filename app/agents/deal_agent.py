@@ -1,12 +1,27 @@
 from __future__ import annotations
 
+from typing import Any
+
+from app.agents.deterministic_engine import DeterministicDecisionEngine
+
 
 class DealAgent:
-    """Placeholder agent interface for future deal-intelligence reasoning graphs."""
+    """Strict deterministic deal agent."""
 
-    def recommend_next_step(self, risk_score: int) -> str:
-        if risk_score >= 70:
-            return "Escalate to manager and re-engage stakeholders within 24 hours."
-        if risk_score >= 40:
-            return "Schedule a follow-up meeting and confirm decision timeline."
-        return "Maintain cadence and monitor engagement signals."
+    def __init__(self) -> None:
+        self.engine = DeterministicDecisionEngine()
+
+    def handle_event(
+        self,
+        event_data: dict[str, Any],
+        crm_data: dict[str, Any],
+        engagement_metrics: dict[str, Any],
+        history: list[dict[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        return self.engine.decide(
+            agent_name="deal_agent",
+            event_data=event_data,
+            crm_data=crm_data,
+            engagement_metrics=engagement_metrics,
+            history=history,
+        )
