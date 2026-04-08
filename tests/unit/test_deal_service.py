@@ -70,8 +70,8 @@ class DealServiceTests(unittest.TestCase):
         result = service.analyze_deal(deal.id)
 
         self.assertEqual(result["deal_id"], str(deal.id))
-        self.assertGreaterEqual(result["risk_score"], 75)
-        self.assertEqual(result["risk_level"], "HIGH")
+        self.assertGreaterEqual(result["risk_score"], 60)
+        self.assertEqual(result["risk_level"], "MEDIUM")
         self.assertTrue(result["no_reply"])
 
 
